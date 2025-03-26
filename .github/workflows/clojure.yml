@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Pull Oracle 21 JDK
+    - name: Pull Oracle 24 JDK
       uses: actions/setup-java@v4
       with:
         distribution: 'oracle'
-        java-version: '21'
+        java-version: '24'
     - name: check JVM install 
       run: javac -version 
