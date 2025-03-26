@@ -20,11 +20,14 @@ jobs:
         java-version: '24'
     - name: check JVM install
       run: javac -version
-    - name: Install leiningen
-      uses: ./
+    - name: Install clojure tools
+      uses: DeLaGuardo/setup-clojure@13.2
       with:
-        lein: 2.9.1
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Check leiningen version
-      run: lein version
+        # Install just one or all simultaneously
+        # The value must indicate a particular version of the tool, or use 'latest'
+        # to always provision the latest version
+        lein: 2.9.1                  # Leiningen
+        clj-kondo: 2025.02.20        # Clj-kondo
+        cljfmt: 0.10.2               # cljfmt
+        cljstyle: 0.16.626           # cljstyle
+        zprint: 1.2.3                # zprint
