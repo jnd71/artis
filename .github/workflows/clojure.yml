@@ -44,9 +44,9 @@ jobs:
     - name: Get zprint version
       run: zprint --version
 
-    - name: Debug print location
-      run: pwd
-    - name: Debug ls dir
-      run: ls -lAF
     - name: Install dependencies
       run: lein deps
+    - name: Check syntax
+      run: lein check
+    - name: Run test
+      run: lein test
