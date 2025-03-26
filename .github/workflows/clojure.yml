@@ -13,7 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses:
+    - name: Pull Oracle 21 JDK
+      uses: actions/setup-java@v4
       with:
         distribution: 'oracle'
         version: '21'
