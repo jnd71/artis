@@ -13,9 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses:
-      with:
-        distribution: 'oracle'
-        version: '21'
-    - name: check JVM install 
-      run: javac -version 
+    - name: Install dependencies
+      run: lein deps
+    - name: Run tests
+      run: lein test
