@@ -13,7 +13,40 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Pull Oracle 24 JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'oracle'
+        java-version: '24'
+    - name: check JVM install
+      run: javac -version
+
+    - name: Install clojure tools
+      uses: DeLaGuardo/setup-clojure@13.2
+      with:
+        # Install just one or all simultaneously
+        # The value must indicate a particular version of the tool, or use 'latest'
+        # to always provision the latest version
+        lein: 2.9.1                  # Leiningen
+        clj-kondo: 2025.02.20        # Clj-kondo
+        cljfmt: 0.10.2               # cljfmt
+        cljstyle: 0.16.626           # cljstyle
+        zprint: 1.2.3                # zprint
+    - name: Get leiningen version
+      run: lein -v
+    - name: Get clj-kondo version
+      run: clj-kondo --version
+    - name: Get cljfmt version
+      run: cljfmt --version
+    - name: Get cljstyle version
+      run: cljstyle version
+    - name: Get zprint version
+      run: zprint --version
+
     - name: Install dependencies
       run: lein deps
-    - name: Run tests
+    - name: Check syntax
+      run: lein check
+    - name: Run test
       run: lein test
