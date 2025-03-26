@@ -18,5 +18,13 @@ jobs:
       with:
         distribution: 'oracle'
         java-version: '24'
-    - name: check JVM install 
-      run: javac -version 
+    - name: check JVM install
+      run: javac -version
+    - name: Install leiningen
+      uses: ./
+      with:
+        lein: 2.9.1
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Check leiningen version
+      run: lein version
