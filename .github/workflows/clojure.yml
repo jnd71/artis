@@ -43,3 +43,10 @@ jobs:
       run: cljstyle version
     - name: Get zprint version
       run: zprint --version
+
+    - name: Debug print location
+      run: pwd
+    - name: Debug ls dir
+      run: ls -lAF
+    - name: Install dependencies
+      run: lein deps
