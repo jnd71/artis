@@ -10,9 +10,14 @@
 (defn- ->list-tag-ns-req
   "Takes `tenancy-id`, `params`, builds and returns an instance of
    `com.oracle.bmc.identity.requests.ListTagNamespaceRequest`."
-  [tenancy-id]
+  [tenancy-id &
+   {:keys [subcompartments?]}]
   (let [builder (doto (ListTagNamespacesRequest/builder)
                       (.compartmentId tenancy-id))]
+    (do
+      (when (true? subcompartments?)
+        (.includeSubcompartments builder true)))
+
     (.build builder)))
 
 (defn- TagNamespaceSummary->map
@@ -28,8 +33,7 @@
    :retired?         (.getIsRetired summary)
    :lifescycle-state (.getValue (.getLifecycleState summary))
    :created-at       (.getTimeCreated summary)
-   :freeform-rags    (.getFreeformTags summary)
-   })
+   :freeform-rags    (.getFreeformTags summary)})
 
 (defn- ListTagNamespacesResponse->map
   "Takes `response`, converts it into a Clojure map."
