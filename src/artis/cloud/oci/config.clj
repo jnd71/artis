@@ -3,7 +3,8 @@
    and ConfigFileAuthenticationDetailsProvider."
   (:import (com.oracle.bmc ConfigFileReader)
            (com.oracle.bmc.auth ConfigFileAuthenticationDetailsProvider)
-           (com.oracle.bmc.identity IdentityClient))
+           (com.oracle.bmc.identity IdentityClient)
+           (com.oracle.bmc.usageapi UsageapiClient))
   (:gen-class))
 
 (defn ->provider
@@ -18,3 +19,10 @@
   ([]         (->identity-client (->provider)))
   ([provider] (let [builder (IdentityClient/builder)]
                 (.build builder provider)))) 
+
+(defn ->usageapi-client
+  "Creates an instance of `com.oracle.bmc.usageapi.UsageapiClient` for use with
+   the Usage API."
+  ([]         (->usageapi-client (->provider)))
+  ([provider] (let [builder (UsageapiClient/builder)]
+                (.build builder provider))))

@@ -12,6 +12,7 @@
                  [com.oracle.oci.sdk/oci-java-sdk-usageapi "3.61.0"]
                  [com.oracle.oci.sdk/oci-java-sdk-cloudguard "3.61.0"]
                  [environ "1.2.0"]
+                 [org.apache.commons/commons-lang3 "3.17.0"]
                  [org.clojure/clojure "1.12.0"]
                  [org.clojure/data.csv "1.1.0"]
                  [org.clojure/tools.logging "1.3.0"]]
@@ -22,5 +23,16 @@
   :plugins [[environ "1.2.0"]]
 
   :target-path "target/%s"
+
+  :aliases {"dev" ["with-profile" "+dev" "repl"]}
+
+  :repl-options { :prompt (fn [ns] (str "" ns "λ " ))
+                 ;; What to print when the repl session starts.
+                 :init-ns artis.workspaces.cost.services
+                 :welcome (println "\n")
+                 :port 40400}
+
   :profiles {:uberjar {:aot :all
-                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
+                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}
+             
+             :dev     {:source-paths ["dev"]}})
